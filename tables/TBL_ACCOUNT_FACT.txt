@@ -1,0 +1,6 @@
+--[as_of_date][acct_id3][cur_bal] ACCOUNT FACT TABLE
+
+SELECT 
+[as_of_date],[acct_id3],[cur_bal]
+INTO TBL_ACCOUNT_FACT
+FROM [dbo].[stg_p1]
