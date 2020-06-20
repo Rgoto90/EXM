@@ -1,0 +1,8 @@
+
+-- TBL_CUSTOMER_ADD
+SELECT cust_add_id
+,cust_add_lat
+,cust_add_lon
+,cust_add_type
+INTO TBL_CUSTOMER_ADD
+FROM [dbo].[stg_p1]

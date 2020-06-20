@@ -1,0 +1,16 @@
+
+--TBL_BRANCH
+SELECT
+acct_branch_id
+,acct_branch_code
+,acct_branch_desc
+,acct_region_id
+,acct_area_id
+,acct_branch_lat
+,acct_branch_lon
+,acct_branch_add_id
+,acct_branch_add_lat
+,acct_branch_add_lon
+,acct_branch_add_type
+INTO TBL_BRANCH FROM [dbo].[stg_p1]
+

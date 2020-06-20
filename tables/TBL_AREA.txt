@@ -1,0 +1,10 @@
+
+--TBL AREA
+SELECT 
+acct_region_id
+,acct_area_id
+INTO TBL_AREA
+FROM [dbo].[stg_p1]
+
+ALTER TABLE TBL_AREA
+ADD CUST_REL_NAME VARCHAR(255)

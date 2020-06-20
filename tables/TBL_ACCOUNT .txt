@@ -1,0 +1,11 @@
+SELECT acct_id
+,cust_id
+,acct_cust_role_id
+,acct_id2
+,prod_id
+,open_date
+,close_date
+,open_close_code
+,branch_id
+INTO TBL_ACCOUNT FROM 
+[dbo].[stg_p1]
