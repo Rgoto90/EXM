@@ -1,0 +1,187 @@
+USE [DFNB2]
+
+/****** Object:  Table [dbo].[tblAccountFact]    Script Date: 6/23/2020 5:00:22 PM ******/
+
+
+ALTER TABLE [dbo].[TBL_ACCOUNT_FACT]
+ADD CONSTRAINT acct_id3 PRIMARY KEY (acct_id3);
+
+
+/****************TBL_ACCOUNT SCRIPT DATE Script Date: 6/23/2020 5:00:22 PM *************/
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_ACCOUNT]    Script Date: 24/06/2020 21:55:18 ******/
+
+--TBL_ACCOUNT CREATION
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_ACCOUNT](
+	[acct_id] [int] NOT NULL,
+	[cust_id] [smallint] NOT NULL,
+	[acct_cust_role_id] [smallint] NOT NULL,
+	[acct_id2] [int] NOT NULL,
+	[prod_id] [smallint] NOT NULL,
+	[open_date] [date] NOT NULL,
+	[close_date] [date] NOT NULL,
+	[open_close_code] [varchar](1) NOT NULL,
+	[branch_id] [smallint] NOT NULL
+) ON [PRIMARY]
+GO
+
+--TBL_ACCOUNT_FACT CREATION
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_ACCOUNT_FACT]    Script Date: 24/06/2020 21:56:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_ACCOUNT_FACT](
+	[as_of_date] [date] NOT NULL,
+	[acct_id3] [int] NOT NULL,
+	[cur_bal] [decimal](20, 4) NOT NULL
+) ON [PRIMARY]
+GO
+
+--[TBL_ACCOUNT_REL]
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_ACCOUNT_REL]    Script Date: 24/06/2020 21:58:01 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_ACCOUNT_REL](
+	[loan_amt] [decimal](20, 4) NOT NULL,
+	[CUST_REL_ID] [smallint] NOT NULL,
+	[ACCT_REL_ID] [smallint] NOT NULL,
+	[ACCT_ID] [int] NOT NULL,
+	[CUST_SINCE_DATE] [date] NOT NULL,
+	[CUST_ADD_ID] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+
+-- TBL_AREA CREATION
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_AREA]    Script Date: 24/06/2020 21:58:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_AREA](
+	[acct_region_id] [int] NOT NULL,
+	[acct_area_id] [int] NOT NULL,
+	[CUST_REL_NAME] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+
+--TBL_CUST_REL CREATION
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_CUST_REL]    Script Date: 24/06/2020 21:59:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_CUST_REL](
+	[cust_rel_id] [smallint] NOT NULL,
+	[CUST_REL_NAME] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+
+--TBL_CUSTOMER CREATION
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_CUSTOMER]    Script Date: 24/06/2020 22:00:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_CUSTOMER](
+	[cust_since_date] [date] NOT NULL,
+	[cust_pri_branch_dist] [decimal](7, 2) NOT NULL,
+	[cust_lat] [decimal](16, 12) NOT NULL,
+	[cust_lon] [decimal](16, 12) NOT NULL,
+	[cust_rel_id] [smallint] NOT NULL,
+	[cust_add_id] [int] NOT NULL,
+	[cust_add_lat] [decimal](16, 12) NOT NULL,
+	[cust_add_lon] [decimal](16, 12) NOT NULL,
+	[cust_add_type] [varchar](1) NOT NULL
+) ON [PRIMARY]
+GO
+
+--TBL_REGION CREATION
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_REGION]    Script Date: 24/06/2020 22:06:45 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_REGION](
+	[acct_region_id] [int] NOT NULL,
+	[REGION_NAME] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+
+
+
+
+/****************Foreign keys creation 6/23/2020 5:00:22 PM *************/
+
+ALTER TABLE [dbo].[TBL_ACCOUNT]
+ADD CONSTRAINT FK_PersonOrder
+FOREIGN KEY (acct_cust_role_id) REFERENCES TBL_ACCOUNT(acct_cust_role_id);
+
+
+ALTER TABLE [dbo].[TBL_ACCOUNT_REL]
+ADD CONSTRAINT FK_ACCT_REL_ID
+FOREIGN KEY (ACCT_REL_ID) REFERENCES [dbo].[TBL_ACCOUNT_REL](ACCT_REL_ID);
+
+
+ALTER TABLE [dbo].[TBL_AREA]
+ADD CONSTRAINT FK_acct_area_id
+FOREIGN KEY (acct_area_id) REFERENCES [dbo].[TBL_AREA]
+
+
+
+ALTER TABLE [dbo].[TBL_CUST_REL]
+ADD CONSTRAINT FK_cust_rel_id
+FOREIGN KEY (cust_rel_id) REFERENCES [dbo].[TBL_CUST_REL]
+
+
+ALTER TABLE [dbo].[TBL_CUSTOMER_ADD]
+ADD CONSTRAINT FK_cust_add_id
+FOREIGN KEY (cust_add_id) REFERENCES [dbo].[TBL_CUSTOMER_ADD]
+
+/******************************indexes creations*************************/
+CREATE INDEX idx_acct_id3
+ON TBL_ACCOUNT_FACT (acct_id3);
+
+CREATE INDEX idx_acct_id
+on [TBL_ACCOUNT] (acct_id)
