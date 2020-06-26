@@ -1,11 +1,27 @@
-SELECT acct_id
-,cust_id
-,acct_cust_role_id
-,acct_id2
-,prod_id
-,open_date
-,close_date
-,open_close_code
-,branch_id
-INTO TBL_ACCOUNT FROM 
-[dbo].[stg_p1]
+USE [DFNB2]
+GO
+
+/****** Object:  Table [dbo].[TBL_ACCOUNT]    Script Date: 25/06/2020 22:32:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_ACCOUNT](
+	[acct_id] [int] NOT NULL,
+	[cust_id] [smallint] NOT NULL,
+	[acct_cust_role_id] [smallint] NOT NULL,
+	[acct_id2] [int] NOT NULL,
+	[prod_id] [smallint] NOT NULL,
+	[open_date] [date] NOT NULL,
+	[close_date] [date] NOT NULL,
+	[open_close_code] [varchar](1) NOT NULL,
+	[branch_id] [smallint] NOT NULL,
+ CONSTRAINT [acct_id] PRIMARY KEY CLUSTERED 
+(
+	[acct_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
